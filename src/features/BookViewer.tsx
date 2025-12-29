@@ -1,6 +1,6 @@
 import { Suspense, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+// import { OrbitControls } from '@react-three/drei';
 import { getBookModel } from 'opencover-3d';
 import * as THREE from 'three';
 
@@ -21,8 +21,8 @@ export default function Book3DViewer({ books }: { books: string[] }) {
     <Canvas
       orthographic
       camera={{
-        position: [3, 3, 3],
-        zoom: 150,
+        position: [10, 10, 10],
+        zoom: 100,
         near: 0.01,
         far: 1000
       }}>
@@ -41,7 +41,7 @@ export default function Book3DViewer({ books }: { books: string[] }) {
 
       <gridHelper args={[100, 800, "#ddd", "#ddd"]} position={[0, 0, 0]} />
 
-      <OrbitControls enableDamping dampingFactor={0.05} />
+      {/* <OrbitControls enableDamping dampingFactor={0.05} /> */}
     </Canvas>
   );
 }
