@@ -6,6 +6,7 @@ import Book3DViewer from './features/BookViewer';
 function App() {
   const [collectionName, setCollectionName] = useState<string>("新書")
   const [selectedBooks, setSelectedBooks] = useState<string[]>([]);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const bookCollections = [
     {
       name: "新書",
@@ -102,8 +103,13 @@ function App() {
     setSelectedBooks(books)
   }, [collectionName])
 
+  useEffect(() => {
+    console.log(selectedIndex)
+  }, [selectedIndex])
+
   return (
     <div style={{ position: "fixed", width: '100vw', height: '100vh' }}>
+      {/* タイトル */}
       <h1 style={{
         position: "absolute",
         top: "2rem",
@@ -125,6 +131,7 @@ function App() {
           target='_blank'
           style={{ textDecoration: "none", color: "inherit", fontSize: "1rem" }}>by opencover</a>
       </h1>
+      {/* コレクション切り替え */}
       <select
         name="collection-names"
         id="collection-name"
@@ -157,6 +164,7 @@ function App() {
           </option>
         ))}
       </select>
+      {/* ページ説明 */}
       <div
         style={{
           position: "absolute",
@@ -171,22 +179,36 @@ function App() {
           padding: "1rem",
           backgroundColor: "#ffffff70",
           backdropFilter: "blur(10px)",
-          borderRadius: "1rem"
+          borderRadius: "1rem",
+          fontSize: "0.75rem",
+
         }}
       >
-        <h2
+        <table
           style={{
-            fontSize: "0.75rem",
-            fontWeight: "bold",
-            margin: 0
+            lineHeight: 1.5,
+            borderCollapse: "collapse",
           }}
         >
-          このページについて
-        </h2>
+          <tbody>
+            <tr>
+              <td style={{ fontWeight: "bold", paddingRight: "0.5rem" }}>Scroll</td>
+              <td>Browse</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold", paddingRight: "0.5rem" }}>Click</td>
+              <td>View Details</td>
+            </tr>
+          </tbody>
+        </table>
+        <span style={{
+          width: "100%",
+          height: "1px",
+          backgroundColor: "#00000050"
+        }} />
         <p
           style={{
             margin: 0,
-            fontSize: "0.9rem",
           }}
         >
           <a
@@ -199,7 +221,11 @@ function App() {
           による〜
         </p>
       </div>
-      <Book3DViewer books={selectedBooks} />
+      <Book3DViewer
+        books={selectedBooks}
+        selectedIndex={selectedIndex}
+        onSelectIndex={setSelectedIndex}
+      />
     </div>
   );
 }
