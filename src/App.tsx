@@ -211,14 +211,14 @@ function App() {
             margin: 0,
           }}
         >
+          powered by
           <a
-            style={{ marginRight: "0.25rem", fontWeight: "bold", color: "inherit" }}
+            style={{ marginLeft: "0.25rem", fontWeight: "bold", color: "inherit" }}
             href="https://opencover.jp/"
             target='_blank'
           >
             opencover
           </a>
-          による〜
         </p>
       </div>
       <Book3DViewer
