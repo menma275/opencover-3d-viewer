@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { getBookModel } from 'opencover-3d';
+import { getBook } from 'opencover-3d';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 
@@ -34,7 +34,8 @@ export function BookModel({
     let mounted = true;
 
     const load = async () => {
-      const model = await getBookModel(isbn);
+      const { model, details } = await getBook(isbn);
+      console.log(details)
       if (!mounted) return;
       groupRef.current?.add(model);
     };
