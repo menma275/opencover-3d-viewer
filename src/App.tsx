@@ -1,13 +1,15 @@
 import './App.css'
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Book3DViewer from './features/BookViewer';
 
+type BookCollectionType = {
+  name: string;
+  books: string[];
+}
+
 function App() {
-  const [collectionName, setCollectionName] = useState<string>("新書")
-  const [selectedBooks, setSelectedBooks] = useState<string[]>([]);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const bookCollections = [
+  const bookCollections: BookCollectionType[] = [
     {
       name: "新書",
       books: [
@@ -97,15 +99,13 @@ function App() {
       ]
     }
   ]
+  const [selectedBooks, setSelectedBooks] = useState<string[]>(bookCollections[0].books);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  useEffect(() => {
+  const handleBookCollection = (collectionName: string) => {
     const books = bookCollections.find(c => c.name === collectionName)?.books ?? [];
     setSelectedBooks(books)
-  }, [collectionName])
-
-  useEffect(() => {
-    console.log(selectedIndex)
-  }, [selectedIndex])
+  }
 
   return (
     <div style={{ position: "fixed", width: '100vw', height: '100vh' }}>
@@ -136,7 +136,7 @@ function App() {
         name="collection-names"
         id="collection-name"
         onChange={
-          (e) => setCollectionName(e.target.value)
+          (e) => handleBookCollection(e.target.value)
         }
         style={{
           position: "absolute",
