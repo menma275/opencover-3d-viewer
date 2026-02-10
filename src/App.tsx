@@ -108,7 +108,7 @@ function App() {
   }
 
   return (
-    <div style={{ position: "fixed", width: '100vw', height: '100vh' }}>
+    <div style={{ position: "fixed", width: '100vw', height: '100dvh' }}>
       {/* タイトル */}
       <h1 style={{
         position: "absolute",
